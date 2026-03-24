@@ -21,3 +21,17 @@ uv add pands
 <!-- 配置deepseek API Key -->
 
 sk-7a7158cf81884ce6993c86eb457a6e2b
+
+# 虚拟环境中安装jupyter
+
+`uv add jupyter`
+虚拟环境中使用jupyter
+方法1：`uv run jupyter notebook`
+方法2：
+
+```shell
+.\.venv\Scripts\activate
+jupyter notebook
+```
+
+**今日进度: day13完**
