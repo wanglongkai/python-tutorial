@@ -26,7 +26,9 @@ sk-7a7158cf81884ce6993c86eb457a6e2b
 
 `uv add jupyter`
 虚拟环境中使用jupyter
-方法1：`uv run jupyter notebook`  
+
+方法1：`uv run jupyter notebook`
+
 方法2：
 
 ```shell
