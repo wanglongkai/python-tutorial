@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path, Query, HTTPException
+from fastapi import FastAPI, Path, Query, HTTPException, Request
 import uvicorn
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse, FileResponse
@@ -83,6 +83,23 @@ async def get_custom():
 @app.get("/error")
 async def get_error():
     raise HTTPException(status_code=400, detail="Bad Request")
+
+
+# 中间件: 包裹应用，形成一个栈，从上往下，最后添加的中间件是“最外层”的，最先添加的是“最内层”的。
+@app.middleware("http")
+async def middleware1(request: Request, call_next):
+    print(f"Request1: {request.url}")
+    response = await call_next(request)
+    print(f"Response1: {response.status_code}")
+    return response
+
+
+@app.middleware("http")
+async def middleware2(request: Request, call_next):
+    print(f"Request2: {request.url}")
+    response = await call_next(request)
+    print(f"Response2: {response.status_code}")
+    return response
 
 
 if __name__ == "__main__":
