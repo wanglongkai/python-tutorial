@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Path, Query, HTTPException, Request
+from fastapi import Depends, FastAPI, Path, Query, HTTPException, Request
 import uvicorn
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse, FileResponse
+from typing import Annotated
 
 app = FastAPI()
 
@@ -100,6 +101,17 @@ async def middleware2(request: Request, call_next):
     response = await call_next(request)
     print(f"Response2: {response.status_code}")
     return response
+
+
+# 依赖注入
+def get_db():
+    return "Database Connection"
+
+
+@app.get("/dependency")
+async def get_dependency(db: Annotated[get_db, Depends()]):
+    # 目前官方推荐Annotated[T, Depends(func)]的写法, 快捷写法是 Annotated[func, Depends()]
+    return {"db": db}
 
 
 if __name__ == "__main__":
