@@ -1,8 +1,15 @@
 from fastapi import APIRouter
 from models.userModel import User
 from crud.userCrud import get_all_users
+from schemas.registerUser import RegisterUser
 
 user_router = APIRouter(prefix="/users", tags=["users"])
+
+
+@user_router.post("/register")
+async def register(user: RegisterUser):
+    user = await User.create(name=user.name, email=user.email, phone=user.phone)
+    return {"message": "User registered successfully", "user": user}
 
 
 @user_router.post("/add_user")

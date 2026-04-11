@@ -1,3 +1,7 @@
+"""
+models 定义数据模型， 基于tortoise-orm库
+"""
+
 from tortoise import fields, models
 
 
