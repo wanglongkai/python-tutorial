@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from router.userRouter import user_router
 from router.newsRouter import news_router
-from db.dbconfig import handle_tortoise
+from config.dbconfig import handle_tortoise
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
