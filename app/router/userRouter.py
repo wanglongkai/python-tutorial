@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from models.userModel import User
+from crud.userCrud import get_all_users
 
 user_router = APIRouter(prefix="/users", tags=["users"])
 
@@ -12,7 +13,7 @@ async def add_user(name: str, email: str, phone: str):
 
 @user_router.get("/users")
 async def get_users():
-    users = await User.all()
+    users = await get_all_users()
     return users
 
 
