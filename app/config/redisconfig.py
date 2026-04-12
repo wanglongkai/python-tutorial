@@ -2,13 +2,26 @@ import json
 from typing import Any
 import redis.asyncio as redis
 
-
-redis_clinet = redis.Redis(
-    host="localhost",  # 主机地址
-    port=6379,  # 端口
-    db=0,  # 选择数据库
-    decode_responses=True,  # 将redis的响应解码为字符串
+redis_pool = redis.ConnectionPool(
+    host="localhost",
+    port=6379,
+    decode_responses=True,
+    encoding="utf-8",
 )
+
+
+redis_client = None
+
+
+async def redis_connect() -> redis.Redis:
+    try:
+        redis_clinet = redis.Redis(connection_pool=redis_pool)
+        sig = await redis_clinet.ping()
+        print(f"连接redis成功: {sig}")
+        return redis_clinet
+    except Exception as e:
+        print(f"连接redis失败: {e}")
+        return None
 
 
 """
@@ -19,7 +32,7 @@ redis_clinet = redis.Redis(
 # 读取字符串缓存
 async def get_str_cache(key: str) -> str:
     try:
-        return await redis_clinet.get(key)
+        return await redis_client.get(key)
     except Exception as e:
         print(f"读取字符串缓存失败: {e}")
         return None
@@ -28,7 +41,7 @@ async def get_str_cache(key: str) -> str:
 # 读取json缓存
 async def get_json_cache(key: str) -> dict:
     try:
-        value = await redis_clinet.get(key)
+        value = await redis_client.get(key)
         if value:
             return json.loads(value)
         return None
@@ -44,7 +57,7 @@ async def set_cache(key: str, value: Any, expire_time: int = 60 * 60 * 24 * 7):
             value = json.dumps(
                 value, ensure_ascii=False
             )  # 确保json字符串不包含ascii字符
-        await redis_clinet.setex(key, expire_time, value)
+        await redis_client.setex(key, expire_time, value)
         return True
     except Exception as e:
         print(f"设置缓存失败: {e}")

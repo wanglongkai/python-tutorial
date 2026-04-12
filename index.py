@@ -86,7 +86,7 @@ async def get_error():
     raise HTTPException(status_code=400, detail="Bad Request")
 
 
-# 中间件: 包裹应用，形成一个栈，从上往下，最后添加的中间件是“最外层”的，最先添加的是“最内层”的。
+# 中间件: 包裹应用，形成一个栈，最后添加的中间件是“最外层”的，最先添加的是“最内层”的。
 @app.middleware("http")
 async def middleware1(request: Request, call_next):
     print(f"Request1: {request.url}")

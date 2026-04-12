@@ -1176,6 +1176,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pyjwt"
+version = "2.12.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c2/27/a3b6e5bf6ff856d2509292e95c8f57f0df7017cf5394921fc4e4ef40308a/pyjwt-2.12.1.tar.gz", hash = "sha256:c74a7a2adf861c04d002db713dd85f84beb242228e671280bf709d765b03672b", size = 102564, upload-time = "2026-03-13T19:27:37.25Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e5/7a/8dd906bd22e79e47397a61742927f6747fe93242ef86645ee9092e610244/pyjwt-2.12.1-py3-none-any.whl", hash = "sha256:28ca37c070cad8ba8cd9790cd940535d40274d22f80ab87f3ac6a713e6e8454c", size = 29726, upload-time = "2026-03-13T19:27:35.677Z" },
+]
+
+[[package]]
 name = "pypika-tortoise"
 version = "0.6.5"
 source = { registry = "https://pypi.org/simple" }
@@ -1206,6 +1215,15 @@ wheels = [
 ]
 
 [[package]]
+name = "python-multipart"
+version = "0.0.26"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/88/71/b145a380824a960ebd60e1014256dbb7d2253f2316ff2d73dfd8928ec2c3/python_multipart-0.0.26.tar.gz", hash = "sha256:08fadc45918cd615e26846437f50c5d6d23304da32c341f289a617127b081f17", size = 43501, upload-time = "2026-04-10T14:09:59.473Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9a/22/f1925cdda983ab66fc8ec6ec8014b959262747e58bdca26a4e3d1da29d56/python_multipart-0.0.26-py3-none-any.whl", hash = "sha256:c0b169f8c4484c13b0dcf2ef0ec3a4adb255c4b7d18d8e420477d2b1dd03f185", size = 28847, upload-time = "2026-04-10T14:09:58.131Z" },
+]
+
+[[package]]
 name = "python-test"
 version = "0.1.0"
 source = { virtual = "." }
@@ -1213,6 +1231,8 @@ dependencies = [
     { name = "fastapi" },
     { name = "jupyter" },
     { name = "pandas" },
+    { name = "pyjwt" },
+    { name = "python-multipart" },
     { name = "redis" },
     { name = "tortoise-orm" },
     { name = "uvicorn" },
@@ -1223,6 +1243,8 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.135.3" },
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "pandas", specifier = ">=3.0.1" },
+    { name = "pyjwt", specifier = ">=2.12.1" },
+    { name = "python-multipart", specifier = ">=0.0.26" },
     { name = "redis", specifier = ">=7.4.0" },
     { name = "tortoise-orm", specifier = ">=1.1.7" },
     { name = "uvicorn", specifier = ">=0.44.0" },
