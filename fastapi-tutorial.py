@@ -115,4 +115,4 @@ async def get_dependency(db: Annotated[get_db, Depends()]):
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, reload=True)
+    uvicorn.run("fastapi-tutorial:app", port=8000, reload=True)

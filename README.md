@@ -35,3 +35,9 @@ sk-7a7158cf81884ce6993c86eb457a6e2b
 .\.venv\Scripts\activate
 jupyter notebook
 ```
+
+## 同步依赖
+根据pyproject.toml同步依赖,并会自动创建.venv虚拟环境
+```shell
+uv sync
+```
