@@ -41,3 +41,9 @@ jupyter notebook
 ```shell
 uv sync
 ```
+
+## 运行项目
+不用手动激活虚拟环境,直接使用uv运行项目即可自动激活虚拟环境
+```shell
+uv run xxx.py
+```
