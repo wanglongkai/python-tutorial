@@ -20,7 +20,10 @@ uv add pands
 
 <!-- 配置deepseek API Key -->
 
+<!--
 sk-7a7158cf81884ce6993c86eb457a6e2b
+sk-404ca40298924d228fd1f812c86408eb
+-->
 
 # 虚拟环境中安装jupyter
 
