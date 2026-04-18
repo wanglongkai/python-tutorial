@@ -12,13 +12,13 @@ async def lifespan(app: FastAPI):
     # 在应用启动时执行
     print("Starting up...", app.title)
     # 将redis连接保存到应用状态中
-    app.state.redis = await redis_connect()
+    # app.state.redis = await redis_connect()
     yield
     # 在应用关闭时执行
     print("Shutting down...", app.title)
     # 关闭redis连接
-    if app.state.redis:
-        await app.state.redis.close()
+    # if app.state.redis:
+    #     await app.state.redis.close()
 
 
 app = FastAPI(lifespan=lifespan, title="FastAPI Tutorial")

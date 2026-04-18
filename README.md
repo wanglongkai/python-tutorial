@@ -50,3 +50,10 @@ uv sync
 ```shell
 uv run xxx.py
 ```
+
+
+## windows设置全局环境变量
+```shell
+ setx DEEPSEEK_API_KEY "42423edarfsfsdfdsfsdf"
+#  setx 全局变量名 全局变量值
+```
