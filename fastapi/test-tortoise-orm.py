@@ -7,7 +7,7 @@ app = FastAPI()
 
 register_tortoise(
     app,
-    db_url="sqlite://test.db",
+    db_url="sqlite://data/test.db",
     modules={"models": ["__main__"]},
     generate_schemas=True,
 )

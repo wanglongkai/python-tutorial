@@ -1,4 +1,4 @@
-from models.userModel import User
+from ..models.userModel import User
 
 
 async def get_all_users():

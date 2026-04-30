@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from utils.auth import create_access_token, get_payload_from_token
+from ..utils.auth import create_access_token, get_payload_from_token
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Annotated
 

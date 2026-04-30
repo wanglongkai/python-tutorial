@@ -1,7 +1,7 @@
 from fastapi import APIRouter
-from models.userModel import User
-from crud.userCrud import get_all_users
-from schemas.registerUser import RegisterUser
+from ..models.userModel import User
+from ..crud.userCrud import get_all_users
+from ..schemas.registerUser import RegisterUser
 
 user_router = APIRouter(prefix="/users", tags=["users"])
 

@@ -11,7 +11,7 @@ from langchain_openai import ChatOpenAI
 
 load_dotenv()
 
-markdown_path = "data_source.md"
+markdown_path = "langchain/rag/data_source.md"
 
 # 加载本地markdown文件
 loader = UnstructuredMarkdownLoader(markdown_path)
