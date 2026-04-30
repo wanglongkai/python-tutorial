@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AITALK - 登录</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+        }
+
+        .login-container {
+            display: flex;
+            width: 1440px;
+            max-width: 100%;
+            height: 900px;
+            max-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ── left panel ── */
+        .brand-panel {
+            width: 240px;
+            background: #D9D9D9;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        .brand-watermark {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Arial Black", "Helvetica Neue", sans-serif;
+            font-size: 128px;
+            font-weight: 900;
+            color: rgba(180, 119, 255, 0.08);
+            white-space: nowrap;
+            transform: rotate(-90deg);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* ── decorative illustration area ── */
+        .decoration-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            min-width: 0;
+        }
+        .decoration-illustration {
+            position: absolute;
+            left: -320px;
+            top: -190px;
+            width: 870px;
+            height: auto;
+            pointer-events: none;
+            user-select: none;
+        }
+        .decoration-tagline {
+            position: absolute;
+            left: 120px;
+            top: 48px;
+            width: 453px;
+            height: auto;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ── right form panel ── */
+        .form-panel {
+            width: 612px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(44px);
+            border-radius: 32px 0 0 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 108px;
+            z-index: 2;
+            box-shadow: -10px 0 67.5px rgba(229, 224, 244, 0.5);
+        }
+        .form-content {
+            width: 396px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 40px;
+        }
+
+        /* ── title ── */
+        .welcome-title {
+            font-family: "Alimama FangYuanTi VF", "PingFang SC", sans-serif;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 48px;
+            text-align: center;
+            color: #1A1A1A;
+        }
+
+        /* ── segmented control ── */
+        .segmented {
+            width: 100%;
+            height: 50px;
+            background: #F3F3F2;
+            border-radius: 68px;
+            display: flex;
+            padding: 2px;
+        }
+        .segmented-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 38px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #5E5E5E;
+            transition: all 0.2s;
+        }
+        .segmented-tab.active {
+            background: #fff;
+            color: #744CFF;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.02),
+                0 1px 6px -1px rgba(0, 0, 0, 0.02),
+                0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* ── form ── */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-label {
+            font-size: 16px;
+            line-height: 24px;
+            color: #757575;
+        }
+        .form-input-wrap {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #E8E8E8;
+            border-radius: 40px;
+            padding: 11px 16px;
+            height: 50px;
+        }
+        .form-input-wrap input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #1A1A1A;
+            background: transparent;
+            font-family: inherit;
+        }
+        .form-input-wrap input::placeholder {
+            color: #A3A3A3;
+        }
+        .eye-icon {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        /* ── checkbox-row ── */
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: -12px;
+        }
+        .checkbox-box {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #D1D1D1;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .checkbox-box.checked {
+            background: #744CFF;
+            border-color: #744CFF;
+        }
+        .checkbox-box.checked::after {
+            content: "✓";
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .checkbox-label {
+            font-size: 14px;
+            line-height: 22px;
+            color: #1A1A1A;
+            cursor: pointer;
+        }
+
+        /* ── submit button ── */
+        .submit-btn {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #8C6BFF 0%, #5D3DCC 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            letter-spacing: 4px;
+            transition: opacity 0.2s;
+        }
+        .submit-btn:hover { opacity: 0.9; }
+
+        /* ── responsive ── */
+        @media (max-width: 1200px) {
+            .decoration-area { display: none; }
+            .login-container { width: 852px; }
+            .form-panel { border-radius: 32px; }
+        }
+        @media (max-width: 880px) {
+            .login-container {
+                width: 100%;
+                height: auto;
+                border-radius: 0;
+            }
+            .brand-panel { display: none; }
+            .form-panel {
+                width: 100%;
+                padding: 40px 24px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .form-content { width: 100%; max-width: 396px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- left brand panel -->
+        <div class="brand-panel">
+            <div class="brand-watermark">AITALK</div>
+        </div>
+
+        <!-- decorative illustration area -->
+        <div class="decoration-area">
+            <img class="decoration-illustration"
+                 src="/static/images/illustration-full.png"
+                 alt="" />
+            <img class="decoration-tagline"
+                 src="/static/images/tagline-decoration.png"
+                 alt="随时随地 开启一段地道的口语对话" />
+        </div>
+
+        <!-- right form panel -->
+        <div class="form-panel">
+            <div class="form-content">
+                <h1 class="welcome-title">Welcome back!</h1>
+
+                <!-- segmented tabs -->
+                <div class="segmented" id="segmented">
+                    <div class="segmented-tab active" data-role="student">学生登录</div>
+                    <div class="segmented-tab" data-role="teacher">教师登录</div>
+                </div>
+
+                <!-- login form -->
+                <form class="login-form" id="loginForm">
+                    <div class="form-field">
+                        <label class="form-label">用户名/邮箱</label>
+                        <div class="form-input-wrap">
+                            <input type="text" placeholder="请输入用户名或邮箱" required />
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">密码</label>
+                        <div class="form-input-wrap">
+                            <input type="password" placeholder="请输入您的密码" required id="passwordInput" />
+                            <svg class="eye-icon" id="eyeToggle" viewBox="0 0 16 16" fill="none"
+                                 stroke="#8C8C8C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z" />
+                                <circle cx="8" cy="8" r="2" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- auto login checkbox -->
+                    <label class="checkbox-row">
+                        <span class="checkbox-box" id="autoLoginCheckbox"></span>
+                        <span class="checkbox-label">自动登录</span>
+                    </label>
+
+                    <button type="submit" class="submit-btn">登 录</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.segmented-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        document.getElementById('autoLoginCheckbox').addEventListener('click', function() {
+            this.classList.toggle('checked');
+        });
+
+        document.getElementById('eyeToggle').addEventListener('click', () => {
+            const pw = document.getElementById('passwordInput');
+            pw.type = pw.type === 'password' ? 'text' : 'password';
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const role = document.querySelector('.segmented-tab.active').dataset.role;
+            const form = e.target;
+            const username = form.querySelector('input[type="text"]').value;
+            const password = form.querySelector('input[type="password"]').value;
+            const autoLogin = document.getElementById('autoLoginCheckbox').classList.contains('checked');
+            console.log({ role, username, autoLogin });
+            // TODO: integrate with auth API
+        });
+    </script>
+</body>
+</html>

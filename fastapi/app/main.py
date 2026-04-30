@@ -1,6 +1,10 @@
+from pathlib import Path
+
 from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
 from .router.userRouter import user_router
 from .router.authRouter import auth_router
+from .router.viewRouter import view_router
 from .config.dbconfig import handle_tortoise
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -52,6 +56,9 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(user_router)
+app.include_router(view_router)
+
+app.mount("/static", StaticFiles(directory=str(Path(__file__).resolve().parent / "static")), name="static")
 
 
 handle_tortoise(app)
